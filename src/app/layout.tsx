@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Source_Sans_3, Roboto_Mono } from 'next/font/google'
-
 import "./globals.css";
-import MainLayout from "@/components/MainLayout";
 
 const robotoMono = Roboto_Mono({
   subsets: ['latin'],
@@ -34,9 +32,7 @@ export default function RootLayout({
         suppressHydrationWarning
         className={`${robotoMono.variable} ${sourceSansPro.variable} antialiased` }
       >
-        <MainLayout>
           {children}
-        </MainLayout>
       </body>
     </html>
   );
