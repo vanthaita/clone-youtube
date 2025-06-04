@@ -3,13 +3,16 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
 }
-
+button {
+  cursor: pointer;
+}
 
 .aside-scroll {
   overflow-y: auto;
@@ -33,3 +36,5 @@ body {
   background-color: rgba(100, 100, 100, 0.4);
   border-radius: 8px;
 }
+
+

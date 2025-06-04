@@ -1,5 +1,6 @@
 import MainLayoutClient from '@/components/layout/MainLayoutClient';
-import React from 'react'
+import LoadingBar from '@/components/LoadingBar';
+import React, { Suspense } from 'react';
 
 const MainLayout = ({
   children,
@@ -8,11 +9,13 @@ const MainLayout = ({
 }>) => {
   return (
     <>
-        <MainLayoutClient>
-            {children}
-        </MainLayoutClient>
+      <MainLayoutClient>
+        <Suspense fallback={<LoadingBar />}>
+          {children}
+        </Suspense>
+      </MainLayoutClient>
     </>
-  )
-}
+  );
+};
 
-export default MainLayout
+export default MainLayout;

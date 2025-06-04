@@ -1,7 +1,9 @@
 'use client'
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import type { VideoCardProps } from '@/types'; 
+import { ROUTES } from '@/contants/routes';
 
 const VideoCard = ({ video }: VideoCardProps) => {
   const {
@@ -13,11 +15,14 @@ const VideoCard = ({ video }: VideoCardProps) => {
     authorAvatar, 
     views,
     uploadTime,
+    id,
   } = video;
   
+  const router = useRouter();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isHovered, setIsHovered] = useState(false);
   const [hoverColor, setHoverColor] = useState('');
+  const [playbackPosition, setPlaybackPosition] = useState(0);
   const hoverTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   const hoverColors = [
@@ -41,7 +46,7 @@ const VideoCard = ({ video }: VideoCardProps) => {
     }
     hoverTimerRef.current = setTimeout(() => {
       if (videoRef.current && isHovered) {
-        videoRef.current.currentTime = 0;
+        videoRef.current.currentTime = playbackPosition;
         videoRef.current.play().catch(e => {
           if (e.name !== 'AbortError') {
             console.error("Error playing video:", e);
@@ -52,9 +57,20 @@ const VideoCard = ({ video }: VideoCardProps) => {
   };
 
   const handleMouseLeave = () => {
-    setIsHovered(false);
     if (videoRef.current) {
+      setPlaybackPosition(videoRef.current.currentTime);
       videoRef.current.pause();
+    }
+    setIsHovered(false);
+  };
+
+  const handleClick = () => {
+    const currentPosition = videoRef.current?.currentTime || 0;
+    
+    if (currentPosition > 0) {
+      router.push(ROUTES.WATCH.WITH_TIME(id, Math.floor(currentPosition)));
+    } else {
+      router.push(ROUTES.WATCH.BASE(id));
     }
   };
 
@@ -66,8 +82,13 @@ const VideoCard = ({ video }: VideoCardProps) => {
     };
   }, []);
 
+
+  
   return (
-    <div className={`flex flex-col w-full cursor-pointer group hover:rounded-2xl p-2 hover:transition-all hover:duration-300 hover:ease-linear ${hoverColor}`}>
+    <div 
+      className={`flex flex-col w-full cursor-pointer group hover:rounded-2xl p-2 hover:transition-all hover:duration-300 hover:ease-linear ${hoverColor}`}
+      onClick={handleClick}
+    >
       <div 
         className='relative'
         onMouseEnter={handleMouseEnter}
@@ -131,7 +152,13 @@ const VideoCard = ({ video }: VideoCardProps) => {
           </div>
         </div>
         <div className='flex-shrink-0 self-start pt-0.5'>
-            <button aria-label="More options" className="p-1 rounded-full hover:bg-gray-200">
+            <button 
+              aria-label="More options" 
+              className="p-1 rounded-full hover:bg-gray-200"
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+            >
                 <svg xmlns="http://www.w3.org/2000/svg" enableBackground="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24" focusable="false" aria-hidden="true" className="fill-current text-gray-600"><path d="M12 16.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5zM10.5 12c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5-1.5.67-1.5 1.5zm0-6c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5-1.5.67-1.5 1.5z"></path></svg>
             </button>
         </div>

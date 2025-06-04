@@ -5,7 +5,7 @@ import { youtubeData } from '@/contants';
 
 const VideoGrid = () => {
   return (
-    <div className='grid xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 grid-cols-1 gap-y-12 sm:pb-0'>
+    <div className='grid xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 grid-cols-1 gap-y-12 sm:pb-0 py-4 pl-4 '>
       {youtubeData.map((videoItem: YouTubeVideo) => (
         <VideoCard
           key={videoItem.id}  

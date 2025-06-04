@@ -4,7 +4,7 @@ import type { SidebarNavItem, SidebarSubscriptionItem } from './navigation';
 
 type SharedSidebarProps = {
   isSidebarExpanded: boolean;
-  setIsSidebarExpanded?: (isExpanded: boolean) => void;
+  setIsSidebarExpanded: (isExpanded: boolean) => void;
 };
 
 export type NavbarProps = SharedSidebarProps;
@@ -24,4 +24,10 @@ export interface SidebarSubscriptionItemComponentProps {
 
 export interface VideoCardProps {
   video: YouTubeVideo;
+}
+
+export interface SectionProps {
+  items: SidebarNavItemComponentProps[];
+  isSidebarExpanded: boolean;
+  Component?: React.ComponentType<{ item: SidebarNavItemComponentProps; isSidebarExpanded?: boolean }>;
 }
