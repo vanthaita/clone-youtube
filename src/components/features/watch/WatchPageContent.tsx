@@ -3,6 +3,7 @@ import VideoPlay from './VideoPlay'
 import ChannelInfo from './ChannelInfo'
 import VIdeoDescription from './VIdeoDescription'
 import VideoComments from './VideoComments'
+import SuggestVideos from './SuggestVideos'
 
 const WatchPageContent = () => {
   return (
@@ -30,9 +31,9 @@ const WatchPageContent = () => {
         </div>
 
 
-        <div className='lg:w-1/3 space-y-4'>
-          
-        </div>
+      <div className="lg:w-1/3 min-w-0">
+        <SuggestVideos />
+      </div>
       </div>
     </div>
   )

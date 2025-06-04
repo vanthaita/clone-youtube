@@ -12,6 +12,7 @@ const VideoPlay = () => {
         >
             <source src='http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4' type="video/mp4" />
         </video>
+
     </div>
   )
 }

@@ -95,7 +95,7 @@ const ChipWrapper = () => {
   }, []);
 
   return (
-    <div className="relative p-2">
+    <div className="relative w-full min-w-0">
       {showArrowLeft && (
         <div className="absolute left-0 top-0 h-full w-24 z-10 flex items-center">
           <div className="absolute left-0 top-0 h-full w-24 bg-gradient-to-r from-white via-white/80 to-transparent pointer-events-none" />
@@ -110,7 +110,7 @@ const ChipWrapper = () => {
 
       <div 
         ref={containerRef}
-        className="flex overflow-x-hidden scrollbar-hide space-x-3 px-4 py-2 select-none"
+        className="flex overflow-x-hidden scrollbar-hide space-x-3 px-4 py-2 w-full min-w-0"
         onScroll={checkPositionArrow}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
@@ -121,7 +121,7 @@ const ChipWrapper = () => {
           <button
             key={chip.name}
             onClick={() => setSelectedChip(chip.name)}
-            className={`py-1 px-3 rounded-lg whitespace-nowrap transition-all cursor-pointer flex-shrink-0 ${
+            className={`py-1 px-3 rounded-lg whitespace-nowrap transition-all cursor-pointer flex-shrink-0 min-w-fit ${
               selectedChip === chip.name
                 ? 'bg-black text-white'
                 : 'bg-gray-100 text-black hover:bg-gray-200'
