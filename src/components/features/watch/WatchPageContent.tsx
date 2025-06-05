@@ -1,5 +1,5 @@
 import React from 'react'
-import VideoPlay from './VideoPlay'
+import VideoPlayer from './VideoPlayer'
 import ChannelInfo from './ChannelInfo'
 import VIdeoDescription from './VIdeoDescription'
 import VideoComments from './VideoComments'
@@ -11,7 +11,7 @@ const WatchPageContent = () => {
       <div className='flex flex-col lg:flex-row gap-4'>
         <div className='lg:w-[calc(100%-384px)] xl:w-[calc(100%-480px)] 2xl:w-full'>
           <div className='aspect-video w-full'>
-            <VideoPlay />
+            <VideoPlayer />
           </div>
           <h1 className='mt-4 text-xl break-words'>
            【2Hour】 공부할 때 듣는 일본 애니ost, J-pop 피아노 모음 | 플레이리스트 ⛱️

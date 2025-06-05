@@ -53,7 +53,7 @@ const VideoCard = ({ video }: VideoCardProps) => {
           }
         });
       }
-    }, 300); 
+    }, 200); 
   };
 
   const handleMouseLeave = () => {
