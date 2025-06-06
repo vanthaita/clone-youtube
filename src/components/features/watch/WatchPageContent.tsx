@@ -7,7 +7,7 @@ import SuggestVideos from './SuggestVideos'
 
 const WatchPageContent = () => {
   return (
-    <div className='md:px-4 lg:px-26 px-2 py-4'>
+    <div className='md:px-4 xl:px-26 px-2 py-4'>
       <div className='flex flex-col lg:flex-row gap-4'>
         <div className='lg:w-[calc(100%-384px)] xl:w-[calc(100%-480px)] 2xl:w-full'>
           <div className='aspect-video w-full'>
@@ -29,7 +29,6 @@ const WatchPageContent = () => {
             <VideoComments />
           </div>
         </div>
-
 
       <div className="lg:w-1/3 min-w-0">
         <SuggestVideos />

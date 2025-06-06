@@ -2,27 +2,36 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
 import { usePathname } from 'next/navigation';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { 
   asideNavigationItems, 
   asideShortNavigationItems 
 } from '@/contants';
-import { SidebarProps } from '@/types';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import SidebarSection from './SidebarSection';
 import { Footer } from './Footer';
 import SidebarHeader from './Header';
 import SubscriptionItem from './SubscriptionItem';
 import NavItem from './NavItem';
+import { useSidebar } from '@/context/sidebarProvider';
 
-const Sidebar = ({
-  isSidebarExpanded,     
-  setIsSidebarExpanded
-}: SidebarProps) => {
+const Sidebar = () => {
   const pathname = usePathname();
   const isWatchPage = pathname?.startsWith('/watch');
   const isMobile = useIsMobile();
+  const {isSidebarExpanded, setIsSidebarExpanded} = useSidebar()
   const DEFAULT_COUNT = isSidebarExpanded ? 4 : 3;
+
+  useEffect(() => {
+    const savedState = localStorage.getItem('sidebarExpanded');
+    if (savedState !== null) {
+      setIsSidebarExpanded(savedState === 'true');
+    }
+  }, [setIsSidebarExpanded]);
+
+  useEffect(() => {
+    localStorage.setItem('sidebarExpanded', String(isSidebarExpanded));
+  }, [isSidebarExpanded]);
 
   return (
     <>
@@ -95,5 +104,6 @@ const Sidebar = ({
     </>
   );
 };
+
 const Divider = () => <div className="border-t border-gray-200 my-2"></div>;
 export default Sidebar;

@@ -4,17 +4,15 @@ import React, { useRef, useState } from 'react'
 import YoutubeLogo from '../common/YoutubeLogo'
 import { Bell, Mic, Plus, Menu, Search, ArrowLeft } from 'lucide-react';
 import { useIsMobile } from '@/hooks/useIsMobile';
-import { NavbarProps } from '@/types';
+import { useSidebar } from '@/context/sidebarProvider';
 
-const Navbar = ({
-  isSidebarExpanded,     
-  setIsSidebarExpanded 
-}: NavbarProps) => {
+const Navbar = () => {
   const isMobile = useIsMobile();
   const [showSearchHistory, setShowSearchHistory] = useState<boolean>(false);
   const [search, setSearch] = useState<string>('');
   const inputRef = useRef<HTMLInputElement>(null);
   const [showSearchBox, setShowSearchBox] = useState<boolean>(false);
+  const {isSidebarExpanded, setIsSidebarExpanded} = useSidebar()
 
   const handleFocus = () => {
     setShowSearchHistory(true);
