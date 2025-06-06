@@ -7,21 +7,19 @@ import {
   asideNavigationItems, 
   asideShortNavigationItems 
 } from '@/contants';
-import { SidebarProps } from '@/types';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import SidebarSection from './SidebarSection';
 import { Footer } from './Footer';
 import SidebarHeader from './Header';
 import SubscriptionItem from './SubscriptionItem';
 import NavItem from './NavItem';
+import { useSidebar } from '@/context/sidebarProvider';
 
-const Sidebar = ({
-  isSidebarExpanded,     
-  setIsSidebarExpanded
-}: SidebarProps) => {
+const Sidebar = () => {
   const pathname = usePathname();
   const isWatchPage = pathname?.startsWith('/watch');
   const isMobile = useIsMobile();
+  const {isSidebarExpanded, setIsSidebarExpanded} = useSidebar()
   const DEFAULT_COUNT = isSidebarExpanded ? 4 : 3;
 
   return (

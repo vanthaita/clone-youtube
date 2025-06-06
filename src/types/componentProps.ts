@@ -2,13 +2,11 @@ import type { YouTubeVideo } from './video';
 import type { SidebarNavItem, SidebarSubscriptionItem } from './navigation'; 
 
 
-type SharedSidebarProps = {
+export type SidebarProps = {
   isSidebarExpanded: boolean;
   setIsSidebarExpanded: (isExpanded: boolean) => void;
 };
 
-export type NavbarProps = SharedSidebarProps;
-export type SidebarProps = SharedSidebarProps;
 
 export interface SidebarNavItemComponentProps {
   item: SidebarNavItem;
