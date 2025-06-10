@@ -25,7 +25,7 @@ export const youtubeData: YouTubeVideo[] = [
         "author": "Blender Inc.",
         "authorAvatar": "https://yt3.ggpht.com/j4winp9JW48bX0r_7zbcZKEG-LQ2vg2aTqp2QPQxL7E2am5Iyqw3CR1cAmdjHWdiJms2b1AS=s68-c-k-c0x00ffffff-no-rj",
         "videoUrl": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
-        "description": "The first Blender Open Movie from 2006, Elephants Dream, tells the story of two strange characters exploring a surreal mechanical world. It was the first open movie project by the Blender Foundation.", // Updated description
+        "description": "The first Blender Open Movie from 2006, Elephants Dream, tells the story of two strange characters exploring a surreal mechanical world. It was the first open movie project by the Blender Foundation.",
         "subscriber": "10,500,000 Subscribers",
         "isLive": true
     },
@@ -39,7 +39,7 @@ export const youtubeData: YouTubeVideo[] = [
         "author": "Google Chromecast",
         "authorAvatar": "https://yt3.ggpht.com/j4winp9JW48bX0r_7zbcZKEG-LQ2vg2aTqp2QPQxL7E2am5Iyqw3CR1cAmdjHWdiJms2b1AS=s68-c-k-c0x00ffffff-no-rj",
         "videoUrl": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-        "description": "Introducing Chromecast. The easiest way to enjoy online video and music on your TV. For $35.  Learn how to use Chromecast with Google Play Movies and more at google.com/chromecast.", // Updated description
+        "description": "Introducing Chromecast. The easiest way to enjoy online video and music on your TV. For $35.  Learn how to use Chromecast with Google Play Movies and more at google.com/chromecast.", 
         "subscriber": "5,340,000 Subscribers",
         "isLive": true
     },
@@ -241,3 +241,8 @@ export const youtubeData: YouTubeVideo[] = [
         "isLive": false
     }
 ];
+
+
+export const getVideoById = (id: string): YouTubeVideo | undefined => {
+    return youtubeData.find(video => video.id === id);
+};

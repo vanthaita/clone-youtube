@@ -2,8 +2,16 @@
 'use client'
 import { Captions, Maximize, Minimize, Pause, Play, Settings, StepForward, Volume2, VolumeOff } from 'lucide-react';
 import React, { useRef, useState, useEffect } from 'react';
+interface VideoPlayerProps {
+  video: {
+    id: string; 
+    videoUrl: string;
+    title: string;
+  };
+  key: string
+}
 
-const VideoPlayer = () => {
+const VideoPlayer = ({ video }: VideoPlayerProps) => {
   const videoRef = useRef<HTMLVideoElement>(null); 
   const progressRef = useRef<HTMLDivElement>(null); 
   const volumeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -120,6 +128,31 @@ const VideoPlayer = () => {
       setCurrentTime(videoRef.current.currentTime);
     }
   };
+  useEffect(() => {
+    setIsPlaying(false);
+    setIsMuted(false);
+    setVolume(1);
+    previousVolume.current = 1;
+    setProgress(0);
+    setCurrentTime(0);
+    
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+      videoRef.current.volume = 1;
+      videoRef.current.muted = false;
+      
+      videoRef.current.load();
+      
+    }
+
+    return () => {
+      if (videoRef.current) {
+        videoRef.current.pause();
+        videoRef.current.currentTime = 0;
+      }
+    };
+  }, [video.id]); 
 
   useEffect(() => {
     const resetControlsTimeout = () => {
@@ -208,13 +241,14 @@ const VideoPlayer = () => {
         ref={videoRef}
         controls={false}
         autoPlay
+        muted={isMuted}
         className="w-full aspect-video"
         playsInline
         disablePictureInPicture
         onTimeUpdate={updateProgress}
         onClick={togglePlay}
       >
-        <source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" type="video/mp4" />
+        <source src={`${video.videoUrl}?t=${Date.now()}`} type="video/mp4" />
       </video>
 
       <div className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/50 to-transparent p-4 transition-opacity duration-300 ${showControls || isFullscreen ? 'opacity-100' : 'opacity-0'}`}>

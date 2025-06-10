@@ -1,14 +1,26 @@
+/* eslint-disable @next/next/no-img-element */
 import React from 'react'
 import { ThumbsDown, ThumbsUp, CornerUpRight, ArrowDownToLine, Ellipsis } from 'lucide-react';
-
-const ChannelInfo = () => {
+interface ChannelInfoProps {
+  author: string;
+  authorAvatar?: string;
+  subscriber?: string;
+  isLive?: boolean;
+}
+const ChannelInfo = ({ author, authorAvatar, subscriber }: ChannelInfoProps) => {
   return (
     <div className='flex md:flex-row flex-col justify-between md:items-center gap-y-1'>
       <div className='flex items-center gap-3'>
-        <div className='w-8 h-8 rounded-full bg-gray-300' />
+        <div className='w-8 h-8 rounded-full'>
+          <img 
+            src={authorAvatar}
+            alt={author}
+            className='w-full h-full object-cover rounded-full'
+          />
+        </div>
         <div>
-          <p className='font-medium text-sm'>Sangeo Of Music</p>
-          <p className='text-gray-700 text-xs'>97.9k subscribers</p>
+          <p className='font-medium text-sm'>{author}</p>
+          <p className='text-gray-700 text-xs'>{subscriber} subscribers</p>
         </div>
         <button className='bg-black text-white rounded-full px-4 py-1.5 text-sm font-medium'>
           Subscribe

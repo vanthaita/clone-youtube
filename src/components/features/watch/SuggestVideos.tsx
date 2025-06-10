@@ -1,18 +1,29 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
 import ChipWrapper from '@/components/layout/ChipWrapper';
-import { youtubeData } from '@/contants';
-const SuggestVideos = () => {
-  
+import { YouTubeVideo } from '@/types';
+import { useRouter } from 'next/navigation';
+import { ROUTES } from '@/contants/routes';
 
+interface SuggestVideosProps {
+  currentVideoId: string;
+  videos: YouTubeVideo[];
+}
+
+const SuggestVideos = ({ currentVideoId, videos }: SuggestVideosProps) => {
+  const suggestedVideos = videos.filter(video => video.id !== currentVideoId);
+  const router = useRouter();
+  const handleClick = (id: string,) => {
+    router.push(ROUTES.WATCH.BASE(id));
+  }
   return (
     <div className="w-full min-w-0">
       <div className="overflow-hidden">
         <ChipWrapper />
       </div>
       <div className="mt-2 px-2">
-        {youtubeData.map((video) => (
-          <div key={video.id} className={`flex gap-3 px-2 py-1 rounded-lg`}>
+        {suggestedVideos.map((video) => (
+          <div key={video.id} className={`flex gap-3 px-2 py-1 rounded-lg cursor-pointer`} onClick={() => handleClick(video.id)}>
             <div className="relative flex-shrink-0 w-40 h-24 rounded-md overflow-hidden">
               <img 
                 src={video.thumbnailUrl}
